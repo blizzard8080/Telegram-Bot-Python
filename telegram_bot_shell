@@ -1,0 +1,42 @@
+#!usr/bin/python
+#Linux Shell Telegram
+#Create by blizzard8080
+
+
+from pprint import pprint
+import time
+import telepot
+import os
+import sys
+
+#CHAT_ID UNTUK BOT TELEGRAM
+authorized_senders = [ISI PAKE CHATID TELEGRAM]
+
+def handle(msg):
+    chat_id = msg['chat']['id']
+    text = msg['text']
+    sender = msg['from']['id']
+    f = open ('bot.log' , 'a')
+    f.write("Chat-id - "+str(chat_id)+" Text - "+str(text)+"Sender - "+str(sender)+"\n")
+    f.close()
+
+    if sender in authorized_senders:
+        args=text.split()
+
+        command = args[0]
+        #COBA 1 Command [PING BOT TELEGRAM]
+        if command == '/ping':
+            host = str(args[1])
+            output=os.popen("ping -c1 "+host).read()
+            bot.sendMessage(chat_id, output)
+
+        if command == '/start':
+            bot.sendMessage(chat_id,"COBA BOT TELEGRAM VIA LINUX SHELL")
+
+
+bot = telepot.Bot('ISI PAKE TOKEN BOT TELEGRAM')
+bot.message_loop(handle)
+
+
+while 1:
+    time.sleep(10)
